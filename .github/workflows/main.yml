@@ -34,3 +34,13 @@ jobs:
           # retention-days: 1
       - name: build release
         run: bash ./gradlew assembleRelease
+        
+      - name: upload artifact to App Center
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+         appName: 775210/GitHubTest
+         token: ${{secrets.APP_CENTER_TOKEN}}
+         group: Collaborators
+         file: app/build/outputs/apk/release/app-release-unsigned.apk
+         notifyTesters: false
+         debug: false
