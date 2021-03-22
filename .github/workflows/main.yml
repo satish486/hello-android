@@ -33,4 +33,4 @@ jobs:
           # path: app/build/outputs/apk/debug/app-debug.apk
           # retention-days: 1
       - name: build release
-        run: ./gradlew assembleRelease
+        run: bash ./gradlew assembleRelease
