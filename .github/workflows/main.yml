@@ -32,15 +32,15 @@ jobs:
           # name: app
           # path: app/build/outputs/apk/debug/app-debug.apk
           # retention-days: 1
-      - name: build release
-        run: bash ./gradlew assembleRelease
+      # - name: build release
+        # run: bash ./gradlew assembleRelease
         
       - name: upload artifact to App Center
-        uses: devussy/AppCenter-Distribute-Github-Action@v1.0.2
+        uses: wzieba/AppCenter-Github-Action@v1
         with:
-         app: 775210/GitHubTest
+         appName: 775210/GitHubTest
          token: ${{secrets.APP_CENTER_TOKEN}}
          group: Collaborators
          file: app/build/outputs/apk/debug/app-debug.apk
-         # notifyTesters: false
-         # debug: false
+         notifyTesters: false
+         debug: false
