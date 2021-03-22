@@ -24,10 +24,13 @@ jobs:
         with:
          java-version: 1.8
 
-      - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
-      - name: Upload APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: app
-          path: app/build/outputs/apk/debug/app-debug.apk
+      # - name: Build debug APK
+        # run: bash ./gradlew assembleDebug --stacktrace
+      # - name: Upload APK
+        # uses: actions/upload-artifact@v1
+        # with:
+          # name: app
+          # path: app/build/outputs/apk/debug/app-debug.apk
+          # retention-days: 1
+      - name: build release
+        run: ./gradlew assembleRelease
