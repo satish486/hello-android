@@ -53,24 +53,30 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-          
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
+
+      - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-        with:
-          projectBaseDir: ./
-          args: >
-           -Dsonar.organization=satish486
-           -Dsonar.projectKey=satish486_hello-android
+        run: ./gradlew build sonarqube --info
+          
+      # - name: SonarCloud Scan
+        # uses: sonarsource/sonarcloud-github-action@master
+        # env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+        # with:
+          # projectBaseDir: ./
+          # args: >
+           # -Dsonar.organization=satish486
+           # -Dsonar.projectKey=satish486_hello-android
         
-      - name: SonarQube Scan
-        uses: kitabisa/sonarqube-action@master
-        with:
-          host: ${{ secrets.SONARQUBE_HOST }}
-          login: ${{ secrets.SONARQUBE_TOKEN }} 
-          projectBaseDir: ./
-          projectKey: "satish486_hello-android"
-          projectName: "hello-android"
-          projectVersion: "v0.0.1"
+      # - name: SonarQube Scan
+        # uses: kitabisa/sonarqube-action@master
+        # with:
+          # host: ${{ secrets.SONARQUBE_HOST }}
+          # login: ${{ secrets.SONARQUBE_TOKEN }} 
+          # projectBaseDir: ./
+          # projectKey: "satish486_hello-android"
+          # projectName: "hello-android"
+          # projectVersion: "v0.0.1"
