@@ -63,7 +63,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-        run: bash ./gradlew build sonarqube --info
+        run: bash ./gradlew build sonarqube --debug
           
       # - name: SonarCloud Scan
         # uses: sonarsource/sonarcloud-github-action@master
