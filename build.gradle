@@ -26,6 +26,7 @@ allprojects {
         jcenter()
     }
 	dependencies {
+		classpath 'com.google.gms:google-services:3.0.0'
         classpath 'com.android.tools.build:gradle:3.1.2'
         
 
@@ -33,7 +34,7 @@ allprojects {
         // in the individual module build.gradle files
     }
 }
-
+apply plugin: 'com.google.gms.google-services'
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
