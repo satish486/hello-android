@@ -86,7 +86,7 @@ jobs:
           # projectName: "hello-android"
           # projectVersion: "v0.0.1"
           
-       - name: SonarCloud Scan
+       - name: SonarCloud Scan2
          uses: sonarsource/sonarcloud-github-action@master
          env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
