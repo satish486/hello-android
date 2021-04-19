@@ -8,86 +8,81 @@ on:
   push:
     branches: [ master ]
 
-# jobs:
-  # # This workflow contains a single job called "build"
-  # build:
-    # # The type of runner that the job will run on
-    # runs-on: ubuntu-latest
-
-    # # Steps represent a sequence of tasks that will be executed as part of the job
-    # steps:
-      # # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # - uses: actions/checkout@v2
-
-      # - name: set up JDK 1.8
-        # uses: actions/setup-java@v1
-        # with:
-         # java-version: 1.8
-
-      # - name: Build debug APK
-        # run: bash ./gradlew assembleDebug --stacktrace
-      # # - name: Upload APK
-        # # uses: actions/upload-artifact@v1
-        # # with:
-          # # name: app
-          # # path: app/build/outputs/apk/debug/app-debug.apk
-          # # retention-days: 1
-      # # - name: build release
-        # # run: bash ./gradlew assembleRelease
-        
-      # - name: upload artifact to App Center
-        # uses: wzieba/AppCenter-Github-Action@v1
-        # with:
-         # appName: 775210/GitHubTest
-         # token: ${{secrets.APP_CENTER_TOKEN}}
-         # group: Collaborators
-         # file: app/build/outputs/apk/debug/app-debug.apk
-         # notifyTesters: false
-         # debug: false
-         
 jobs:
+  # This workflow contains a single job called "build"
   build:
-    name: Build
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-          
-      - name: Set up JDK 11
+
+      - name: set up JDK 1.8
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+         java-version: 1.8
 
-      # - name: Build and analyze
-        # env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          # SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-        # run: bash ./gradlew build sonarqube --info
-          
-      # - name: SonarCloud Scan
-        # uses: sonarsource/sonarcloud-github-action@master
-        # env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+      - name: Build debug APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      # - name: Upload APK
+        # uses: actions/upload-artifact@v1
         # with:
-          # projectBaseDir: ./
-          # args: >
-           # -Dsonar.organization=satish486
-           # -Dsonar.projectKey=satish486_hello-android
+          # name: app
+          # path: app/build/outputs/apk/debug/app-debug.apk
+          # retention-days: 1
+      # - name: build release
+        # run: bash ./gradlew assembleRelease
         
-      # - name: SonarQube Scan
-        # uses: kitabisa/sonarqube-action@master
+      - name: upload artifact to App Center
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+         appName: 775210/GitHubTest
+         token: ${{secrets.APP_CENTER_TOKEN}}
+         group: Collaborators
+         file: app/build/outputs/apk/debug/app-debug.apk
+         notifyTesters: false
+         debug: false
+         
+# jobs:
+  # build:
+    # name: Build
+    # runs-on: ubuntu-latest
+    # steps:
+      # - uses: actions/checkout@v2
         # with:
-          # host: ${{ secrets.SONARQUBE_HOST }}
-          # login: ${{ secrets.SONARQUBE_TOKEN }} 
-          # projectBaseDir: ./
-          # projectKey: "satish486_hello-android"
-          # projectName: "hello-android"
-          # projectVersion: "v0.0.1"
+          # fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           
-      - name: SonarCloud Scan2
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+      # - name: Set up JDK 11
+        # uses: actions/setup-java@v1
+        # with:
+          # java-version: 11
+
+      # # - name: Build and analyze
+        # # env:
+          # # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          # # SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+        # # run: bash ./gradlew build sonarqube --info
+          
+      # # - name: SonarCloud Scan
+        # # uses: sonarsource/sonarcloud-github-action@master
+        # # env:
+          # # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # # SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+        # # with:
+          # # projectBaseDir: ./
+          # # args: >
+           # # -Dsonar.organization=satish486
+           # # -Dsonar.projectKey=satish486_hello-android
+        
+      # # - name: SonarQube Scan
+        # # uses: kitabisa/sonarqube-action@master
+        # # with:
+          # # host: ${{ secrets.SONARQUBE_HOST }}
+          # # login: ${{ secrets.SONARQUBE_TOKEN }} 
+          # # projectBaseDir: ./
+          # # projectKey: "satish486_hello-android"
+          # # projectName: "hello-android"
+          # # projectVersion: "v0.0.1"
+
